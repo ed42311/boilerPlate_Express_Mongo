@@ -1,11 +1,28 @@
 {
   "name": "dreamsback",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "./node_modules/.bin/nodemon server js",
+    "start": "node server.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Montana-Code-School/DreamsBack.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Montana-Code-School/DreamsBack/issues"
+  },
+  "homepage": "https://github.com/Montana-Code-School/DreamsBack#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "mongoose": "^5.4.17",
+    "nodemon": "^1.18.10"
+  },
+  "description": ""
 }
