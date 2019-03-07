@@ -6,6 +6,8 @@ require('dotenv').config();
 
 // express builds our server framework
 const express = require('express');
+// for reading parameters attached on the body on a web request
+const bodyParser = require('body-parser');
 
 // path for resolving absolute paths
 const path = require('path');
@@ -51,6 +53,10 @@ db.once('open', onDBConnected)
 // ROUTES GO HERE
 // Make a test route that sends back json and status 200 -->
 // Test route yay!  which takes in req and res
+const { createDream } = require('./routeHandlers')
+//Must use body-parser middleware before routes are called
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json());
 app.get('/test', function(req, res){
   // it should respond with a status of 200
   // res is the response object
@@ -61,6 +67,7 @@ app.get('/test', function(req, res){
   res.json({'message': 'worked!'})
   // data.message = "worked!"
 })
+app.post('/dreams', createDream )
 // <--  here
 
 // Tell our app to listen for calls
