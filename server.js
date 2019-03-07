@@ -1,6 +1,9 @@
 // going to build out a simple server and
 // respond to / with index.html
 
+// use the dotenv config thing to create a process.env
+require('dotenv').config();
+
 // express builds our server framework
 const express = require('express');
 
@@ -10,20 +13,27 @@ const path = require('path');
 // mongoose the ODM that connects to mongodb
 const mongoose = require('mongoose');
 
+// add cors into the app
+const cors = require('cors')
+
 // Local variables for database
-const dbURI = process.env.MONGODB_URI || 'mongodb://localhost/dreams';
-const port = process.env.PORT || 3000;
+// Destructure our process.env variables
+const { MONGODB_URI, PORT, FRONTEND_URL } = process.env;
 
 // build an instance of our app:
 const app = express();
 
-// add CORS and tell our app to use it:
-const cors = require('cors')
-app.use(cors());
+const corsOptions = {
+  origin: FRONTEND_URL,
+  allowedHeaders: 'Origin, X-Requested-With, Content-Type',
+  methods: 'GET, PUT, POST, DELETE',
+}
+
+app.use(cors(corsOptions));
 
 // connect to your database on localhost through the URI
 // now we have our URI, what do we need to pass it here -->
-mongoose.connect(dbURI, {useNewUrlParser: true});
+mongoose.connect(MONGODB_URI, {useNewUrlParser: true});
 
 function onDBConnected(){
   console.log('we are connected to mongo db')
@@ -37,6 +47,8 @@ db.on('error', console.error.bind(console, 'connection error:'))
 // Confirm connection when connected:
 db.once('open', onDBConnected)
 
+
+// ROUTES GO HERE
 // Make a test route that sends back json and status 200 -->
 // Test route yay!  which takes in req and res
 app.get('/test', function(req, res){
@@ -52,6 +64,6 @@ app.get('/test', function(req, res){
 // <--  here
 
 // Tell our app to listen for calls
-app.listen(port, function(){
-  console.log('we are running on ' + port)
+app.listen(PORT, function(){
+  console.log('we are running on ' + PORT)
 });
