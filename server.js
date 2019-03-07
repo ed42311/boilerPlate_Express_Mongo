@@ -53,7 +53,7 @@ db.once('open', onDBConnected)
 // ROUTES GO HERE
 // Make a test route that sends back json and status 200 -->
 // Test route yay!  which takes in req and res
-const { createDream } = require('./routeHandlers')
+const { createDream, getDreams } = require('./routeHandlers')
 //Must use body-parser middleware before routes are called
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());
@@ -67,8 +67,12 @@ app.get('/test', function(req, res){
   res.json({'message': 'worked!'})
   // data.message = "worked!"
 })
-app.post('/dreams', createDream )
+// put dreams in the DB
+app.post('/dreams', createDream );
 // <--  here
+
+//Get dreams from the DB
+app.get('/dreams', getDreams );
 
 // Tell our app to listen for calls
 app.listen(PORT, function(){
