@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "./node_modules/.bin/nodemon server js",
+    "test": "./node_modules/.bin/mocha test",
+    "dev": "./node_modules/.bin/nodemon server.js",
     "start": "node server.js"
   },
   "author": "",
@@ -18,11 +18,14 @@
   },
   "homepage": "https://github.com/Montana-Code-School/DreamsBack#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.17"
   },
   "devDependencies": {
-    "mongoose": "^5.4.17",
-    "nodemon": "^1.18.10"
+    "mocha": "^6.0.2",
+    "nodemon": "^1.18.10",
+    "sinon": "^7.2.7"
   },
   "description": ""
 }
