@@ -17,6 +17,10 @@ const port = process.env.PORT || 3000;
 // build an instance of our app:
 const app = express();
 
+// add CORS and tell our app to use it:
+const cors = require('cors')
+app.use(cors());
+
 // connect to your database on localhost through the URI
 // now we have our URI, what do we need to pass it here -->
 mongoose.connect(dbURI, {useNewUrlParser: true});
