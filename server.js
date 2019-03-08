@@ -1,16 +1,11 @@
-// going to build out a simple server and
-// respond to / with index.html
-
 // use the dotenv config thing to create a process.env
 require('dotenv').config();
 
 // express builds our server framework
 const express = require('express');
+
 // for reading parameters attached on the body on a web request
 const bodyParser = require('body-parser');
-
-// path for resolving absolute paths
-const path = require('path');
 
 // mongoose the ODM that connects to mongodb
 const mongoose = require('mongoose');
@@ -25,23 +20,30 @@ const { MONGODB_URI, PORT, FRONTEND_URL } = process.env;
 // build an instance of our app:
 const app = express();
 
+// CorsOptions allows 3rd party apps to be used
+// origin is where our requests begin
+// allowedHeaders is what kind of meta-data we are selecting
+// methods are action-types allowed on database requests
 const corsOptions = {
   origin: FRONTEND_URL,
   allowedHeaders: 'Origin, X-Requested-With, Content-Type',
   methods: 'GET, PUT, POST, DELETE',
 }
 
+// middleware to attach cors with corsOptions passed to it.
 app.use(cors(corsOptions));
 
 // connect to your database on localhost through the URI
 // now we have our URI, what do we need to pass it here -->
 mongoose.connect(MONGODB_URI, {useNewUrlParser: true});
 
+// notifying us that mongoose is connected to the server
 function onDBConnected(){
   console.log('we are connected to mongo db')
 }
+
+// stashing this in a variable that we can call methods on
 const db = mongoose.connection;
-// <-- like right here, yay!
 
 // Attach an Error handler in case of a connection error:
 db.on('error', console.error.bind(console, 'connection error:'))
@@ -49,14 +51,17 @@ db.on('error', console.error.bind(console, 'connection error:'))
 // Confirm connection when connected:
 db.once('open', onDBConnected)
 
+// routeHandlers are imported and destructured from our exported routeHandlers file
+const { createDream, getDreams, editDream } = require('./routeHandlers')
+
+// Must use body-parser middleware before routes are called
+app.use(bodyParser.urlencoded({ extended: true }))
+// parse the response body back into a json object
+app.use(bodyParser.json());
 
 // ROUTES GO HERE
 // Make a test route that sends back json and status 200 -->
 // Test route yay!  which takes in req and res
-const { createDream, getDreams, editDream } = require('./routeHandlers')
-//Must use body-parser middleware before routes are called
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json());
 app.get('/test', function(req, res){
   // it should respond with a status of 200
   // res is the response object
@@ -71,10 +76,10 @@ app.get('/test', function(req, res){
 app.post('/dreams', createDream );
 // <--  here
 
-//Get dreams from the DB
+// Get dreams from the DB
 app.get('/dreams', getDreams );
 
-//get edited dreams from the DB
+// editing a dream, saving it in the DB and recieving edited dreams from the DB
 app.put('/dreams', editDream);
 
 // Tell our app to listen for calls
