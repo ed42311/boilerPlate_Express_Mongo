@@ -19,5 +19,11 @@ module.exports = {
       if (err) return res.status(400).json(err);
       res.status(200).json(editedDream);
     });
+  },
+  deleteDream: function(req, res){
+    Dream.findByIdAndDelete(req.params._id, function(err, deletedDream){
+      if (err) return res.status(400).json(err);
+      res.status(200).json(deletedDream);
+    })
   }
 }

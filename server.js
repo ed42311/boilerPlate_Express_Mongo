@@ -82,6 +82,9 @@ app.get('/dreams', getDreams );
 // editing a dream, saving it in the DB and recieving edited dreams from the DB
 app.put('/dreams', editDream);
 
+// delete a dream
+app.delete('/dreams', deleteDream);
+
 // Tell our app to listen for calls
 app.listen(PORT, function(){
   console.log('we are running on ' + PORT)
