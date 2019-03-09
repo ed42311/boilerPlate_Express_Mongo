@@ -21,7 +21,8 @@ module.exports = {
     });
   },
   deleteDream: function(req, res){
-    Dream.findByIdAndDelete(req.params._id, function(err, deletedDream){
+    const { _id } = req.body
+    Dream.findByIdAndDelete(_id, function(err, deletedDream){
       if (err) return res.status(400).json(err);
       res.status(200).json(deletedDream);
     })

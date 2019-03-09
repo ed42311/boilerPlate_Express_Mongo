@@ -52,7 +52,7 @@ db.on('error', console.error.bind(console, 'connection error:'))
 db.once('open', onDBConnected)
 
 // routeHandlers are imported and destructured from our exported routeHandlers file
-const { createDream, getDreams, editDream } = require('./routeHandlers')
+const { createDream, getDreams, editDream, deleteDream } = require('./routeHandlers')
 
 // Must use body-parser middleware before routes are called
 app.use(bodyParser.urlencoded({ extended: true }))
