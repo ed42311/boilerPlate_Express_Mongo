@@ -8,7 +8,6 @@ module.exports = {
     })
   },
   getDreams(req, res) {
-    console.log("get request made: ", req.query)
     Dream.find(req.query, function(err, dreams){
       if (err) return res.status(500).json(err);
       res.status(200).json(dreams);
@@ -16,10 +15,15 @@ module.exports = {
   },
   editDream(req, res){
     const { title, content, _id, userId } = req.body;
-    Dream.findByIdAndUpdate(_id, {title, content, userId}, {new: true}, function(err, editedDream){
-      if (err) return res.status(400).json(err);
-      res.status(200).json(editedDream);
-    });
+    Dream.findByIdAndUpdate(
+      _id, 
+      {title, content, userId}, 
+      {new: true}, 
+      function(err, editedDream){
+        if (err) return res.status(400).json(err);
+        res.status(200).json(editedDream);
+      }
+    );
   },
   deleteDream: function(req, res){
     const { _id } = req.body
