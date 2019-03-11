@@ -7,7 +7,7 @@ module.exports = {
       res.status(201).json(savedDream);
     })
   },
-  getDreams(req, res) {
+  getDreamsByUserId(req, res) {
     Dream.find(req.query, function(err, dreams){
       if (err) return res.status(500).json(err);
       res.status(200).json(dreams);
