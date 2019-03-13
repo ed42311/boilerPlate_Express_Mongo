@@ -11,7 +11,11 @@ const dreamSchema = new mongoose.Schema({
   userId: {
     type: String,
     required: true,
-  }
+  },
+  imgArr: {
+    type: Array,
+    required: true,
+  },
 });
 
 const Dream = mongoose.model('Dream', dreamSchema);
