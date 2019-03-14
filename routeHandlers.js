@@ -3,6 +3,7 @@ const { Dream } = require('./models');
 module.exports = {
   createDream(req, res){
     Dream.create(req.body, function(err, savedDream){
+      console.log(req.body);
       if (err) return res.status(400).json(err);
       res.status(201).json(savedDream);
     })
@@ -16,9 +17,9 @@ module.exports = {
   editDream(req, res){
     const { title, content, _id, userId } = req.body;
     Dream.findByIdAndUpdate(
-      _id, 
-      {title, content, userId}, 
-      {new: true}, 
+      _id,
+      {title, content, userId},
+      {new: true},
       function(err, editedDream){
         if (err) return res.status(400).json(err);
         res.status(200).json(editedDream);
