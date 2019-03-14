@@ -12,7 +12,7 @@ const dreamSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  imgArr: {
+  imgUrlArr: {
     type: Array,
     required: true,
   },
