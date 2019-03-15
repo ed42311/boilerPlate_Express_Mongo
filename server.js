@@ -74,7 +74,9 @@ app.get('/test', function(req, res){
 })
 // put dreams in the DB
 app.post('/dreams', createDream );
-// <--  here
+
+app.post('/testCreate', createDream );
+
 
 // Get dreams by user id from the DB
 app.get('/dreams', getDreamsByUserId );

@@ -9,6 +9,16 @@ const {
 } = require('./routeHandlers');
 const { Dream } = require('./models');
 
+const fakeDream = {
+  "images": [
+    {url: "https://cdn.pixabay.com/photo/2016/03/09/09/43/person-1245959_150.jpg", caption: "caption string"},
+    {url: "https://cdn.pixabay.com/photo/2016/10/04/23/52/cow-1715829_150.jpg", caption: "caption string"}
+  ],
+  "title": "walk the dog",
+  "content": "mountain cow dog",
+  "userId": "AlqCIo2zDROu8FlvJPEyZJRr4en2",
+}
+
 let res = {};
 
 let sandbox;
@@ -52,7 +62,7 @@ it('should delete a Dream', function(){
   const id =  new mongoose.Types.ObjectId();
   let req = {
     body: {
-      _id: id, 
+      _id: id,
     }
   };
   let expectedResult = {
@@ -73,7 +83,7 @@ it('should update a Dream', function(){
   const id =  new mongoose.Types.ObjectId();
   let req = {
     body: {
-      _id: id, 
+      _id: id,
       title: "Flying Dream",
       content: "Flying around magically",
       userId: "wxyzabc"
@@ -89,9 +99,9 @@ it('should update a Dream', function(){
   sandbox.stub(Dream, 'findByIdAndUpdate').yields(null, expectedResult);
   editDream(req, res);
   sinon.assert.calledWith(
-    Dream.findByIdAndUpdate, 
-    id, 
-    {title, content, userId}, 
+    Dream.findByIdAndUpdate,
+    id,
+    {title, content, userId},
     {new: true}
   );
   sinon.assert.calledWith(
@@ -112,8 +122,8 @@ it('should get Dreams by user id', function(){
   sandbox.stub(Dream, 'find').yields(null, expectedResult);
   getDreamsByUserId(req, res);
   sinon.assert.calledWith(
-    Dream.find,  
-    req.query 
+    Dream.find,
+    req.query
   );
   sinon.assert.calledWith(
     res.json,

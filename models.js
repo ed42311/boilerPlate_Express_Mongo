@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const dreamSchema = new mongoose.Schema({
+const Schema = mongoose.Schema;
+const dreamSchema = new Schema({
   title:{
     type: String,
     required: true,
@@ -12,14 +13,24 @@ const dreamSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  imgUrlArr: {
-    type: Array,
+  images: [{ type: Schema.Types.ObjectId, ref: 'Image' }]
+}, {timestamps: true});
+
+const imageSchema = new Schema({
+  url: {
+    type: String,
     required: true,
   },
-});
+  caption: {
+    type: String,
+    required: true,
+  },
+}, {timestamps: true});
 
 const Dream = mongoose.model('Dream', dreamSchema);
+const Image = mongoose.model('Image', imageSchema);
 
 module.exports = {
-  Dream
+  Dream,
+  Image,
 };
