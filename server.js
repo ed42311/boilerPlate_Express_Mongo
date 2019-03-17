@@ -52,7 +52,7 @@ db.on('error', console.error.bind(console, 'connection error:'))
 db.once('open', onDBConnected)
 
 // routeHandlers are imported and destructured from our exported routeHandlers file
-const { createDream, getDreamsByUserId, editDream, deleteDream } = require('./routeHandlers')
+const { createDream, getDreamsByUserId, editDream, deleteDream, createDreamAllAsync } = require('./routeHandlers')
 
 // Must use body-parser middleware before routes are called
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -74,9 +74,6 @@ app.get('/test', function(req, res){
 })
 // put dreams in the DB
 app.post('/dreams', createDream );
-
-app.post('/testCreate', createDream );
-
 
 // Get dreams by user id from the DB
 app.get('/dreams', getDreamsByUserId );
