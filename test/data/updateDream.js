@@ -3,7 +3,7 @@ const {
   DREAM_TITLE_CRUD: title,
   DREAM_CONTENT_CRUD: content,
   DREAM_USERID_CRUD: userId,
-} = require('../../constants')
+} = require('../../constants');
 
 const req = { body: { _id, title, content, userId } };
 const reqBodyErr = { body: { } };
@@ -15,4 +15,4 @@ module.exports = {
   reqBodyErr,
   reqBodyIdErr,
   expectedResult
-}
+};

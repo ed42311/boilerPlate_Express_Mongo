@@ -6,7 +6,7 @@ const {
   DATE_TWO,
   CAP_ONE,
   CAP_TWO
-} = require('../../constants')
+} = require('../../constants');
 
 const imageData = [
   {
@@ -39,4 +39,4 @@ const bodyImagesData = [
 module.exports = {
   imageData,
   bodyImagesData,
-}
+};

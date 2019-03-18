@@ -3,12 +3,12 @@ const {
   DREAM_TITLE_CRUD: title,
   DREAM_CONTENT_CRUD: content,
   DREAM_USERID_CRUD: userId,
-} = require('../../constants')
+} = require('../../constants');
 
 const {
   imageData,
   bodyImagesData
-} = require('./image')
+} = require('./image');
 
 const req = {
   body: {
@@ -17,19 +17,19 @@ const req = {
     content,
     userId,
   }
-}
+};
 
 const reqArrErr = {
   body: {
-    images: "not good"
+    images: 'not good'
   }
-}
+};
 
 const reqImagesEmpty = {
   body: {}
-}
+};
 
-const dreamData = { ...req.body, images: [...imageData] }
+const dreamData = { ...req.body, images: [...imageData] };
 const expectedResult = { _id, images: [...imageData], title, content, userId};
 module.exports = { 
   req,
@@ -38,4 +38,4 @@ module.exports = {
   imageData, 
   dreamData, 
   expectedResult 
-}
+};

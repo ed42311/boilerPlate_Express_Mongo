@@ -1,0 +1,16 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "spread": true
+    }
+  },
+  "rules": {
+    "quotes": ["error", "single"],
+    "indent": ["error", 2],
+    "max-len": ["error", 100],
+    "multiline-comment-style": ["error", "separate-lines"],
+    "semi": ["error", "always"]
+  }
+}
