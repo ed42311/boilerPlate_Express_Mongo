@@ -11,7 +11,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 // add cors into the app
-const cors = require('cors')
+const cors = require('cors');
 
 // Local variables for database
 // Destructure our process.env variables
@@ -28,7 +28,7 @@ const corsOptions = {
   origin: FRONTEND_URL,
   allowedHeaders: 'Origin, X-Requested-With, Content-Type',
   methods: 'GET, PUT, POST, DELETE',
-}
+};
 
 // middleware to attach cors with corsOptions passed to it.
 app.use(cors(corsOptions));
@@ -39,23 +39,28 @@ mongoose.connect(MONGODB_URI, {useNewUrlParser: true});
 
 // notifying us that mongoose is connected to the server
 function onDBConnected(){
-  console.log('we are connected to mongo db')
+  console.log('we are connected to mongo db');
 }
 
 // stashing this in a variable that we can call methods on
 const db = mongoose.connection;
 
 // Attach an Error handler in case of a connection error:
-db.on('error', console.error.bind(console, 'connection error:'))
+db.on('error', console.error.bind(console, 'connection error:'));
 
 // Confirm connection when connected:
-db.once('open', onDBConnected)
+db.once('open', onDBConnected);
 
 // routeHandlers are imported and destructured from our exported routeHandlers file
-const { createDream, getDreamsByUserId, editDream, deleteDream } = require('./routeHandlers')
+const { 
+  createDream, 
+  getDreamsByUserId, 
+  editDream, 
+  deleteDream 
+} = require('./routeHandlers');
 
 // Must use body-parser middleware before routes are called
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded({ extended: true }));
 // parse the response body back into a json object
 app.use(bodyParser.json());
 
@@ -69,12 +74,11 @@ app.get('/test', function(req, res){
   res.status(200);
   // it also has a method on it called json
   // which returns a JSON object -> {"somekey": "some value"}
-  res.json({'message': 'worked!'})
+  res.json({'message': 'worked!'});
   // data.message = "worked!"
-})
+});
 // put dreams in the DB
 app.post('/dreams', createDream );
-// <--  here
 
 // Get dreams by user id from the DB
 app.get('/dreams', getDreamsByUserId );
@@ -87,5 +91,5 @@ app.delete('/dreams', deleteDream);
 
 // Tell our app to listen for calls
 app.listen(PORT, function(){
-  console.log('we are running on ' + PORT)
+  console.log('we are running on ' + PORT);
 });
