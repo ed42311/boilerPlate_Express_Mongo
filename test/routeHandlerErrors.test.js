@@ -2,7 +2,7 @@ const sinon = require('sinon');
 const mongoose = require('mongoose');
 const assert = require('assert');
 
-const { 
+const {
   CREATE_DREAM,
   DELETE_DREAM,
   EDIT_DREAM,
@@ -24,7 +24,7 @@ const {
 } = require('../routeHandlers');
 
 // Import data for tests
-const { 
+const {
   createDreamData,
   deleteDreamData,
   updateDreamData,
@@ -56,11 +56,11 @@ describe('Restful API error handlers for dreams', function() {
 
     createDream(reqEmptyErr, res);
     sinon.assert.calledWith(
-      res.status, 
+      res.status,
       sinon.match(400)
     );
     sinon.assert.calledWith(
-      res.json, 
+      res.json,
       sinon.match({ error: ERR_BODY })
     );
   });
@@ -73,11 +73,11 @@ describe('Restful API error handlers for dreams', function() {
 
     createDream(req, res);
     sinon.assert.calledWith(
-      res.status, 
+      res.status,
       sinon.match(400)
     );
     sinon.assert.calledWith(
-      res.json, 
+      res.json,
       sinon.match({ error: ERR_IMG })
     );
   });
@@ -90,11 +90,11 @@ describe('Restful API error handlers for dreams', function() {
 
     createDream(req, res);
     sinon.assert.calledWith(
-      res.status, 
+      res.status,
       sinon.match(400)
     );
     sinon.assert.calledWith(
-      res.json, 
+      res.json,
       sinon.match({ error: ERR_ARR })
     );
   });
@@ -103,11 +103,11 @@ describe('Restful API error handlers for dreams', function() {
     // destructure error data for test, scoped to block
     getDreamsByUserId(reqEmptyErr, res);
     sinon.assert.calledWith(
-      res.status, 
+      res.status,
       sinon.match(400)
     );
     sinon.assert.calledWith(
-      res.json, 
+      res.json,
       sinon.match({ error: ERR_QUERY })
     );
   });
@@ -120,29 +120,29 @@ describe('Restful API error handlers for dreams', function() {
 
     getDreamsByUserId(req, res);
     sinon.assert.calledWith(
-      res.status, 
+      res.status,
       sinon.match(400)
     );
     sinon.assert.calledWith(
-      res.json, 
+      res.json,
       sinon.match({ error: ERR_USERID })
     );
   });
 
-  it(`${EDIT_DREAM}() should return error when req is empty`, function () {
+  xit(`${EDIT_DREAM}() should return error when req is empty`, function () {
     // destructure error data for test, scoped to block
     editDream(reqEmptyErr, res);
     sinon.assert.calledWith(
-      res.status, 
+      res.status,
       sinon.match(400)
     );
     sinon.assert.calledWith(
-      res.json, 
+      res.json,
       sinon.match({ error: ERR_BODY })
     );
   });
 
-  it(`${EDIT_DREAM}() should return error when body is missing neccessary content`, function () {
+  xit(`${EDIT_DREAM}() should return error when body is missing neccessary content`, function () {
     // destructure error data for test, scoped to block
     const {
       reqBodyIdErr: req
@@ -150,11 +150,11 @@ describe('Restful API error handlers for dreams', function() {
 
     editDream(req, res);
     sinon.assert.calledWith(
-      res.status, 
+      res.status,
       sinon.match(400)
     );
     sinon.assert.calledWith(
-      res.json, 
+      res.json,
       sinon.match({ error: ERR_CONTENT })
     );
   });
@@ -164,11 +164,11 @@ describe('Restful API error handlers for dreams', function() {
 
     deleteDream(reqEmptyErr, res);
     sinon.assert.calledWith(
-      res.status, 
+      res.status,
       sinon.match(400)
     );
     sinon.assert.calledWith(
-      res.json, 
+      res.json,
       sinon.match({ error: ERR_BODY })
     );
   });
