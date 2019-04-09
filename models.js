@@ -22,7 +22,12 @@ const imageSchema = new Schema({
     required: true,
   },
   keyword: {
-    type: String, 
+    type: String,
+    required: true,
+  },
+  savedPlace: {
+    type: Number,
+    required: true,
   },
 }, {timestamps: true});
 

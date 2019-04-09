@@ -69,7 +69,7 @@ app.use((req, res, next)=>{
 
   if(req.body.images) {
     req.body.images.forEach(e => {
-      console.log('url to db ', e.url);
+      // console.log('image obj saved to db, ', e);
     });
   };
   next();

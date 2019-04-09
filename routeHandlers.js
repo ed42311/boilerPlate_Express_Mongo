@@ -96,7 +96,6 @@ module.exports = {
     let allNew = !req.body.images.filter( image => image._id).length;
     let someNew = (req.body.images.filter( image => image._id).length !== req.body.images.length);
     let noNew = (req.body.images.filter( image => image._id).length === req.body.images.length);
-
     if(noImgs) {
       if(bodyValid(req, res, EDIT_DREAM)) {
         const { _id, title, content, userId, images } = req.body;
@@ -104,7 +103,7 @@ module.exports = {
         for (let i = 0; i < images.length; i++) {
           imagePromises.push(Image.findByIdAndUpdate(
             images[i]._id,
-            { keyword: images[i].keyword },
+            { keyword: images[i].keyword, savedPlace: images[i].savedPlace },
             { new: true },
             (err, savedImage) => {
               if (err) return res.status(400).json(err);
@@ -173,7 +172,7 @@ module.exports = {
         for (let i = 0; i < images.length; i++) {
           imagePromises.push(Image.findByIdAndUpdate(
             images[i]._id,
-            { keyword: images[i].keyword },
+            { keyword: images[i].keyword, savedPlace: images[i].savedPlace },
             { new: true },
             (err, savedImage) => {
               if (err) return res.status(400).json(err);
