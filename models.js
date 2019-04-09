@@ -21,9 +21,8 @@ const imageSchema = new Schema({
     type: String,
     required: true,
   },
-  caption: {
-    type: String,
-    required: true,
+  keyword: {
+    type: String, 
   },
 }, {timestamps: true});
 

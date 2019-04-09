@@ -65,6 +65,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // parse the response body back into a json object
 app.use(bodyParser.json());
 
+app.use((req, res, next)=>{
+
+  if(req.body.images) {
+    req.body.images.forEach(e => {
+    });
+  };
+  next();
+});
+
 // ROUTES GO HERE
 // Make a test route that sends back json and status 200 -->
 // Test route yay!  which takes in req and res

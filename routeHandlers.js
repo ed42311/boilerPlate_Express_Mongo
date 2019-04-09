@@ -104,7 +104,7 @@ module.exports = {
         for (let i = 0; i < images.length; i++) {
           imagePromises.push(Image.findByIdAndUpdate(
             images[i]._id,
-            { caption: images[i].caption },
+            { keyword: images[i].keyword },
             { new: true },
             (err, savedImage) => {
               if (err) return res.status(400).json(err);
@@ -173,7 +173,7 @@ module.exports = {
         for (let i = 0; i < images.length; i++) {
           imagePromises.push(Image.findByIdAndUpdate(
             images[i]._id,
-            { caption: images[i].caption },
+            { keyword: images[i].keyword },
             { new: true },
             (err, savedImage) => {
               if (err) return res.status(400).json(err);
