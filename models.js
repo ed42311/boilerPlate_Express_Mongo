@@ -25,7 +25,7 @@ const imageSchema = new Schema({
     type: String,
     required: true,
   },
-  savedPlace: {
+  lastViewedIndex: {
     type: Number,
     required: true,
   },

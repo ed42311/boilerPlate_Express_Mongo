@@ -65,15 +65,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // parse the response body back into a json object
 app.use(bodyParser.json());
 
-app.use((req, res, next)=>{
-
-  if(req.body.images) {
-    req.body.images.forEach(e => {
-      // console.log('image obj saved to db, ', e);
-    });
-  };
-  next();
-});
+const debug = false;
+if (debug) {
+  app.use((req, res, next)=>{
+    if(req.body.images) {
+      req.body.images.forEach(e => {
+        // console.log('image obj saved to db, ', e);
+      });
+    };
+    next();
+  });
+}
 
 // ROUTES GO HERE
 // Make a test route that sends back json and status 200 -->

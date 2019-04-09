@@ -103,7 +103,7 @@ module.exports = {
         for (let i = 0; i < images.length; i++) {
           imagePromises.push(Image.findByIdAndUpdate(
             images[i]._id,
-            { keyword: images[i].keyword, savedPlace: images[i].savedPlace },
+            { keyword: images[i].keyword, lastViewedIndex: images[i].lastViewedIndex },
             { new: true },
             (err, savedImage) => {
               if (err) return res.status(400).json(err);
@@ -172,7 +172,7 @@ module.exports = {
         for (let i = 0; i < images.length; i++) {
           imagePromises.push(Image.findByIdAndUpdate(
             images[i]._id,
-            { keyword: images[i].keyword, savedPlace: images[i].savedPlace },
+            { keyword: images[i].keyword, lastViewedIndex: images[i].lastViewedIndex },
             { new: true },
             (err, savedImage) => {
               if (err) return res.status(400).json(err);
