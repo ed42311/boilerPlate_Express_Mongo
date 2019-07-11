@@ -22,15 +22,19 @@ function onDBConnected(){
   console.log('we are connected to mongo db');
 }
 
+// Setup a connection to mongoose and runs the initial command
+// after open has occured
 const db = mongoose.connection;
-
 db.on('error', console.error.bind(console, 'connection error:'));
-
 db.once('open', onDBConnected);
 
+//  This pulls json data out of the req and handles forms
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+
+//  This is some basic middleware that logs the request body
+//  if there is one in development only, nice for debugging
 if (process.env.NODE_ENV === 'development') {
   app.use((req, res, next)=>{
     console.log('run it');
@@ -41,11 +45,16 @@ if (process.env.NODE_ENV === 'development') {
   });
 }
 
+
+//  A test route, if this isn't working then you know you need
+//  to debug something under the hood
 app.get('/test', function(req, res){
   res.status(200);
   res.json({'message': 'worked!'});
 });
 
+// Basic schema setup, these are usaully broken out, but this is
+// left in here for simplicities sake
 const testSchema = new Schema({
   title:{
     type: String,
@@ -57,8 +66,10 @@ const testSchema = new Schema({
   },
 }, {timestamps: true});
 
+// Attach the model to the db and call the collection test
 const Test = mongoose.model('Test', testSchema);
 
+//  Basic crud routes
 app.post('/api/test/new', function(req, res) {
   Test.create({...req.body}, (err, savedTest) => {
     if (err) return res.status(400).json(err);
